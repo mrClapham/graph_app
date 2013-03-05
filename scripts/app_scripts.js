@@ -8,17 +8,18 @@
 
 // test persistant vars
 
+
 var _pieModel;
 var _pieController;
 var _pieData =
     [
-        {"age": "<5", "population": "9704659"},
-        {"age": "5-13", "population": "4499890"},
-        {"age": "14-17", "population": "2159981"},
-        {"age": "18-24", "population": "3853788"},
-        {"age": "25-44", "population": "14106543"},
-        {"age": "45-64", "population": "8819342"},
-        {"age": "≥65", "population": "612463"}
+        {"label": "First item", "value": "700"},
+        {"label": "Second", "value": "200"},
+        {"label": "Third", "value": "300"},
+        {"label": "Fourth", "value": "400"},
+        {"label": "Fifth", "value": "500"},
+        {"label": "Sixth", "value": "100"},
+        {"label": "Last", "value": "150"}
     ];
 
 $(document).ready(function(){
@@ -99,54 +100,74 @@ function testPie1(data){
             data:data,
             width:500,
             height:600,
+            outerOffset: 10,
+            thickness:70,
             radius:null,
             arc:null,
             arcs:null,
             pie:null,
             targ:$('#pie1'),
-            svg:null
+            svg:null,
+            arcColors:null,
+            sorting:null
         },
         view:{},
         controller:{
             init:function(){
-                console.log("INIT called");
                 scope.model.radius = Math.min(scope.model.width, scope.model.height) / 2;
                 scope.controller.initSVG();
+                scope.controller.initColours();
+                scope.controller.initPie();
                 scope.controller.initArc();
-                scope.controller.populate();
-                console.log('init')
+                scope.controller.initArcs();
+            },
+            draw:function(){
+
+            },
+            initColours:function(){
+                scope.model.arcColors = d3.scale.ordinal()
+                    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+            },
+            initPie:function(){
+                scope.model.pie = d3.layout.pie()
+                    .sort(scope.model.sorting)
+                    .value(function(d) { return d.value; });
             },
             initSVG:function(){
-                scope.model.svg = d3.select("body").append("svg");
+                scope.model.svg = d3.select("body").append("svg")
                     .attr("width", scope.model.width)
                     .attr("height", scope.model.height)
                     .data(scope.model.data)
                     .append("g")
                     .attr("transform", "translate(" + scope.model.width / 2 + "," + scope.model.height / 2 + ")");
-                console.log('initSVG')
             },
             initArc:function(){
-                console.log("SVG ="+scope.model.svg);
                 scope.model.arc = d3.svg.arc()
-                    .outerRadius( scope.model.radius - 10 )
-                    .innerRadius( scope.model.radius - 50 );
+                    .outerRadius( scope.model.radius - scope.model.outerOffset )
+                    .innerRadius( scope.model.radius - (scope.model.thickness+scope.model.outerOffset) );
                 var __data = scope.model.data;
                 var __pie = scope.model.pie;
                 scope.model.arcs = scope.model.svg.selectAll('g.arc');
-                console.log('initArc')
             },
-            populate:function(){
-                scope.model.data.forEach(function(d){
-                    console.log("_____populate called")
-                });
-                console.log('Populate');
-            },
-            initPie:function(){
-                scope.model.pie = d3.layout.pie()           //this will create arc data for us given a list of values
-                    .value(function(d) { return d.value; });    //we must tell it out to access the value of each element in our data array
+            initArcs:function(){
+                scope.model.arcs = scope.model.svg.selectAll(".arc")
+                    .data(scope.model.pie(scope.model.data))
+                    .enter().append("g")
+                    .attr("class", "arc");
+
+                scope.model.arcs.append("path")
+                    .attr("d", scope.model.arc)
+                    .style("fill", function(d) { return scope.model.arcColors(d.data.label); })
+
+                scope.model.arcs.append("text")
+                    .attr("transform", function(d) { return "translate(" + scope.model.arc.centroid(d) + ")"; })
+                    .attr("dy", ".35em")
+                    .style({"text-anchor":  "middle", "color" : "#ff00ff"})
+                    .text(function(d) { return d.data.label; });
             }
         }
     };
+
     scope.controller.init();
 
     return scope;
