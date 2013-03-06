@@ -34,6 +34,8 @@ var _pieData2 =
         {"label": "XX Last", "value": "150"}
     ];
 
+var _testPie1
+
 
 $(document).ready(function(){
     init();
@@ -48,7 +50,7 @@ function init(){
 function init_tests(){
     // The Google Chating
   //  google.load('visualization', '1.0', {'packages':['corechart'], 'callback':initCharts});
-    var _testPie1 = new Comp_pie(_pieData);
+     _testPie1 = new Comp_pie(_pieData);
 
 
 //d3 -- simple svg circle test...
@@ -57,10 +59,31 @@ function init_tests(){
             e.preventDefault();
             window.location.href = "#/";
             testCircleScript();
+            setNewData();
             return false;
         }
     );
 }
+/*
+
+TEST FUNCTIONS ONLY
+
+ */
+
+function setNewData(){
+    console.log("---  setNewData")
+    _testPie1.setData(_pieData2)
+}
+
+
+
+/*
+TEST FUNCTIONS END
+ */
+
+
+
+
 //
 function initCharts(){
     _pieModel = Backbone.Model.extend({});
