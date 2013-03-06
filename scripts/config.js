@@ -8,12 +8,14 @@ require.config({
     // JavaScript folders.
     libs: "../scripts/libs",
     plugins: "../scripts/plugins",
+    tr: "..scripts/tr",
 
     // Libraries.
     jquery: "../scripts/libs/jquery",
     lodash: "../scripts/libs/lodash",
     backbone: "../scripts/libs/backbone",
-    d3v3: "../scripts/libs/d3.v3"
+    d3v3: "../scripts/libs/d3.v3",
+    comp_pie: "../scripts/tr/comp_pie"
     },
 
   shim: {
@@ -27,11 +29,11 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
 
      // The main non-boilerpalte app javaScript
-      app_scripts :["jquery", "d3v3"]
+      "app_scripts" :["jquery", "d3v3", "comp_pie"],
 
+     // Pie component
+      "..scripts/tr/comp_pie.js" : ["d3v3"]
   }
-
-
 
 });
 
