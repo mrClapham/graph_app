@@ -48,7 +48,10 @@ function init(){
 }
 //
 function init_tests(){
-    // The Google Chating
+
+
+
+    // The Google Charting example -- commented out...
   //  google.load('visualization', '1.0', {'packages':['corechart'], 'callback':initCharts});
      _testPie1 = new Comp_pie(_pieData);
 

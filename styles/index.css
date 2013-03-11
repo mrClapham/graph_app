@@ -1,1 +1,18 @@
 @import "h5bp.css";
+.orange{
+    background-color: #ff4c1a;
+}
+.turquoise{
+    background-color: #15ffad;
+}
+.grey1{
+    background-color: #999999;
+}
+.grey2{
+    background-color: #747474;
+}
+.grey3{
+    background-color: #484848;
+}
+
+'#484848', '#747474','#999999','#15ffad', '#ff4c1a'

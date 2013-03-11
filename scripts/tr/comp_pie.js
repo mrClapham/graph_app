@@ -17,6 +17,7 @@ function Comp_pie(data){
             radius:null,
             arc:null,
             arcs:null,
+            arcPaths:null,
             pie:null,
             targ:$('#pie1'),
             svg:null,
@@ -47,7 +48,7 @@ function Comp_pie(data){
             },
             initColours:function(){
                 scope.model.arcColors = d3.scale.ordinal()
-                    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+                    .range(['#484848', '#747474','#999999','#15ffad', '#ff4c1a']);
             },
             initPie:function(){
                 scope.model.pie = d3.layout.pie()
@@ -70,7 +71,10 @@ function Comp_pie(data){
                 scope.model.arcs.append("path")
                     .attr("d", scope.model.arc)
                     .style("fill", function(d) { return scope.model.arcColors(d.data.label); })
-                    .each(function(d){this._current=d;}) // storing an initial value of 'd' for later tweening;
+                    .each(function(d){
+                        this._current=d;
+
+                    }) // storing an initial value of 'd' for later tweening;
                 ;
 
                 scope.model.arcs.append("text")
@@ -78,7 +82,6 @@ function Comp_pie(data){
                     .attr("dy", ".35em")
                     .style({"text-anchor":  "middle", "color" : "#ff00ff"})
                     .text(function(d) { return d.data.label; });
-                console.log("initArcs CALLED");
             },
             onSegmentMouseOver:function(d,i){
                 console.log("onSegmentMouseOver d = "+d+"  i "+i)
@@ -87,19 +90,25 @@ function Comp_pie(data){
             // Then, interpolate from _current to the new angles.
             // During the transition, _current is updated in-place by d3.interpolate.
             arcTween:function(a){
-                var i = d3.interpolate(this._current, a);
-                console.log("arcTween CALLED "+this._current)
+                var i = d3.interpolate({value: a._current}, a);
+                console.log("arcTween CALLED "+a._current)
 
                 this._current = i(0);
 
                 return function(t) {
-                    return arc(i(t));
+                    return scope.model.arc(i(t));
                 }
             },
             update:function(){
                 console.log("update CALLED");
-
-                scope.model.arcs.transition().duration(750).attrTween("d", scope.controller.arcTween(a));
+                scope.model.arcPaths = scope.model.svg.selectAll("path")
+                    .transition().duration(750).attrTween("d", scope.controller.arcTween)
+                    //.data(scope.model.pie(scope.model.data))
+                    .each(function(d){
+                        console.log("CURRENT + "+this._current)
+                        //this.transition().duration(750).attrTween("d", scope.controller.arcTween(this));
+                    });
+                    //.transition().duration(750).attrTween("d", scope.controller.arcTween(this));
             },
             change:function(){
 
@@ -109,7 +118,7 @@ function Comp_pie(data){
 
     scope.setData=function(value){
        scope.model.data = value;
-       scope.controller.draw();
+       scope.controller.initPie();
        scope.controller.update();
 
     }
