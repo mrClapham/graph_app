@@ -1,9 +1,6 @@
 /**
- * Created with JetBrains WebStorm.
- * User: grahamcapham
- * Date: 07/03/2013
- * Time: 13:15
- * To change this template use File | Settings | File Templates.
+ * The DataVisClass is the base class for all the Data Visualisation components.
+ *
  */
 DataVisClass = function(){
     var t = this;
@@ -12,6 +9,10 @@ DataVisClass = function(){
         height:100,
         ident:'DataVisClass-ident'
     }
+    /**
+     * onStateChange responds to the Event dispatched when a paramater is changed via the 'set' function of the SuperClass 'Core'.
+     * @param e
+     */
     t.controller.onStateChange = function(e){
         //console.log("THERE HAS BEEN A STATE CHANGE TO: "+ e.data.id+" -- ident "+ t.model.ident)
         var _id= e.data.id;
@@ -29,8 +30,6 @@ DataVisClass = function(){
             default :
                 console.log("onStateChange DEFAULT CALLED")
             break;
-
-
         }
 
     }
@@ -47,5 +46,3 @@ DataVisClass = function(){
     init()
 }
 Core.extend(DataVisClass, 'DataVisClass');
-
-var ttt = new DataVisClass()
