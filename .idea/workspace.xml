@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/tr/Core.js" afterPath="$PROJECT_DIR$/scripts/tr/Core.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/tr/DataVisClass.js" afterPath="$PROJECT_DIR$/scripts/tr/DataVisClass.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app_scripts.js" afterPath="$PROJECT_DIR$/scripts/app_scripts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363022809176" ignored="false" />
+    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363099507677" ignored="false" />
     <file path="/DataVisBase.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362669202184" ignored="false" />
     <file path="/InheritTest.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362666759824" ignored="false" />
-    <file path="/app_scripts.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363002686413" ignored="false" />
+    <file path="/app_scripts.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363102459334" ignored="false" />
     <file path="/config.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362669436719" ignored="false" />
-    <file path="/Core.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363021170890" ignored="false" />
-    <file path="/DataVisClass.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363022056713" ignored="false" />
+    <file path="/Core.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363102907223" ignored="false" />
+    <file path="/DataVisClass.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363101797062" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +38,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="802" selection-end="802" vertical-scroll-proportion="-13.75">
+            <state line="4" column="19" selection-start="248" selection-end="248" vertical-scroll-proportion="-2.5">
               <folding />
             </state>
           </provider>
@@ -54,16 +56,7 @@
       <file leaf-file-name="app_scripts.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/app_scripts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="934" selection-end="934" vertical-scroll-proportion="37.2">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Core.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/scripts/tr/Core.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="9" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.16666667">
+            <state line="37" column="0" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -72,7 +65,16 @@
       <file leaf-file-name="DataVisClass.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/tr/DataVisClass.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="57" selection-start="706" selection-end="706" vertical-scroll-proportion="-6.52">
+            <state line="21" column="57" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Core.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scripts/tr/Core.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.6126761">
               <folding />
             </state>
           </provider>
@@ -90,7 +92,7 @@
       <file leaf-file-name="comp_pie.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/tr/comp_pie.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="33" selection-start="3696" selection-end="3696" vertical-scroll-proportion="0.0">
+            <state line="8" column="9" selection-start="176" selection-end="176" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -136,17 +138,18 @@
         <option value="$PROJECT_DIR$/scripts/tr/DataVisBase.js" />
         <option value="$PROJECT_DIR$/scripts/config.js" />
         <option value="$PROJECT_DIR$/scripts/tr/comp_pie.js" />
-        <option value="$PROJECT_DIR$/scripts/app_scripts.js" />
-        <option value="$PROJECT_DIR$/scripts/tr/Core.js" />
         <option value="$PROJECT_DIR$/scripts/tr/TesterDataVis.js" />
+        <option value="$PROJECT_DIR$/scripts/app_scripts.js" />
         <option value="$PROJECT_DIR$/scripts/tr/DataVisClass.js" />
+        <option value="$PROJECT_DIR$/scripts/tr/Core.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
+    <option name="x" value="-1920" />
+    <option name="y" value="-765" />
     <option name="width" value="1920" />
-    <option name="height" value="1120" />
+    <option name="height" value="1200" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -214,6 +217,33 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Problems">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -276,33 +306,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="tr" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Problems">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -484,10 +487,14 @@
       <created>1363022817779</created>
       <updated>1363022817779</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Events being picked up globally at present -- need to scope them to instances">
+      <created>1363024669381</created>
+      <updated>1363024669381</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
-  <component name="TodoView" selected-index="0">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <are-packages-shown value="false" />
       <are-modules-shown value="false" />
@@ -508,16 +515,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1120" extended-state="6" />
+    <frame x="-1920" y="-765" width="1920" height="1200" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296593" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.304" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934132" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2705443" sideWeight="0.374" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2948244" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14787431" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32902032" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15421557" sideWeight="0.512939" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2705443" sideWeight="0.314" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15421557" sideWeight="0.18484288" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3263473" sideWeight="0.9845251" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -526,6 +532,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296593" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -573,7 +580,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Event Model added, getters/setters functioning and dispatching Events" />
+    <option name="LAST_COMMIT_MESSAGE" value="Events being picked up globally at present -- need to scope them to instances" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -599,6 +606,7 @@
     <MESSAGE value="Base class of the Data Vis Objects - inherits from the Core class. Initial commit" />
     <MESSAGE value="First Commit: base Class for all the DataVis Classes" />
     <MESSAGE value="Event Model added, getters/setters functioning and dispatching Events" />
+    <MESSAGE value="Events being picked up globally at present -- need to scope them to instances" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -609,11 +617,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/ECMAScript.js2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="25" selection-start="2807" selection-end="2807" vertical-scroll-proportion="0.33264676" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ArcTweenTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="323" selection-end="323" vertical-scroll-proportion="0.0" />
@@ -624,11 +627,6 @@
         <state line="1141" column="12" selection-start="37964" selection-end="37964" vertical-scroll-proportion="0.2342932">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="14" selection-start="968" selection-end="968" vertical-scroll-proportion="0.5301047" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/main.js">
@@ -650,16 +648,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/scripts/tr/DataVisBase.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="802" selection-end="802" vertical-scroll-proportion="-13.75">
+        <state line="21" column="9" selection-start="499" selection-end="499" vertical-scroll-proportion="0.50643086">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts/tr/DataVisBase.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="9" selection-start="499" selection-end="499" vertical-scroll-proportion="0.50643086">
+        <state line="65" column="0" selection-start="922" selection-end="922" vertical-scroll-proportion="0.3325766">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="7" selection-start="854" selection-end="854" vertical-scroll-proportion="0.3325766">
           <folding />
         </state>
       </provider>
@@ -673,21 +678,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tr/comp_pie.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="33" selection-start="3696" selection-end="3696" vertical-scroll-proportion="0.0">
+        <state line="8" column="9" selection-start="176" selection-end="176" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
+    <entry file="file://$PROJECT_DIR$/scripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="7" selection-start="1298" selection-end="1298" vertical-scroll-proportion="0.33283582">
+        <state line="43" column="11" selection-start="965" selection-end="965" vertical-scroll-proportion="0.92406875">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/app_scripts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="934" selection-end="934" vertical-scroll-proportion="37.2">
+        <state line="37" column="0" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="248" selection-end="248" vertical-scroll-proportion="-2.5">
           <folding />
         </state>
       </provider>
@@ -701,14 +713,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tr/DataVisClass.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="57" selection-start="706" selection-end="706" vertical-scroll-proportion="-6.52">
+        <state line="21" column="57" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/tr/Core.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="9" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.16666667">
+        <state line="29" column="0" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.6126761">
           <folding />
         </state>
       </provider>

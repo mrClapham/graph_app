@@ -11,9 +11,12 @@
 
 function Core(){
     var t = this
+    this.STATE_CHANGE=function(){return 'stateChange'};
+
     t.onStateChange=function(e){
-       // alert("State has changed")
+        alert("State has changed")
     }
+    //alert("INIT CORE")
 }
 /**
  *
@@ -22,12 +25,18 @@ function Core(){
 Core.prototype={
     constructor: 'Core',
     _listeners: {},
-    STATE_CHANGE:'stateChange',
-    addListener: function(type, listener){
-        if (typeof this._listeners[type] == "undefined"){
-            this._listeners[type] = [];
+
+    addListener: function(type, listener, scope){
+        scope._listeners = {};
+
+        if (scope._listeners== "undefined"){
+            scope._listeners = {};
         }
-        this._listeners[type].push(listener);
+
+            if (typeof scope._listeners[type] == "undefined"){
+            scope._listeners[type] = [];
+        }
+        scope._listeners[type].push(listener);
     },
 
     fire: function(event, data){
@@ -51,9 +60,9 @@ Core.prototype={
         }
     },
 
-    removeListener: function(type, listener){
-        if (this._listeners[type] instanceof Array){
-            var listeners = this._listeners[type];
+    removeListener: function(type, listener, scope){
+        if (scope._listeners[type] instanceof Array){
+            var listeners = scope._listeners[type];
             for (var i=0, len=listeners.length; i < len; i++){
                 if (listeners[i] === listener){
                     listeners.splice(i, 1);
@@ -62,13 +71,21 @@ Core.prototype={
             }
         }
     },
+    init:function(){
+        //-- not used yet
+    },
     model:{data1:"DATA ONE"}, view:{},  controller:{}
 }
+
+Core.prototype.setEventHandlers = function(){
+    alert("setEventHandlers CALLED")
+}
+
 
 /* Core functions to be inherited here */
 
 Core.prototype.onModelChanged = function(e){
-    console.log("onModelChanged calld with fire func")
+    console.log("onModelChanged called with fire func")
 }
 /**
  * The 'set' function sets a value in the 'model'.

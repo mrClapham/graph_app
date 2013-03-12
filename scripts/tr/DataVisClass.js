@@ -14,7 +14,7 @@ DataVisClass = function(){
      * @param e
      */
     t.controller.onStateChange = function(e){
-        //console.log("THERE HAS BEEN A STATE CHANGE TO: "+ e.data.id+" -- ident "+ t.model.ident)
+        console.log("THERE HAS BEEN A STATE CHANGE TO: "+ e.data.id+" -- ident "+ t.model.ident)
         var _id= e.data.id;
         var _value= e.data.value;
         switch(_id){
@@ -33,16 +33,12 @@ DataVisClass = function(){
         }
 
     }
-    t.addListener('stateChange', t.controller.onStateChange )
-
-
-    init = function(){
-        /*
-            for(vars in t ){
-                console.log("VARS : "+vars+" : "+t[vars])
-            }
-        */
+    try{
+    t.addListener('stateChange', t.controller.onStateChange, t )
+    }catch(e){
+        console.log("ERROOR _______"+e)
     }
-    init()
+
+
 }
 Core.extend(DataVisClass, 'DataVisClass');

@@ -43,92 +43,12 @@ $(document).ready(function(){
 
 
 function init(){
+    alert("HELLOOOO")
     init_tests();
-    // Set a callback to run when the Google Visualization API is loaded.
 }
 //
 function init_tests(){
 
-
-
-    // The Google Charting example -- commented out...
-  //  google.load('visualization', '1.0', {'packages':['corechart'], 'callback':initCharts});
      _testPie1 = new Comp_pie(_pieData);
 
-
-//d3 -- simple svg circle test...
-    $("#circ_btt").click(
-        function(e){
-            e.preventDefault();
-            window.location.href = "#/";
-            testCircleScript();
-            setNewData();
-            return false;
-        }
-    );
 }
-/*
-
-TEST FUNCTIONS ONLY
-
- */
-
-function setNewData(){
-    console.log("---  setNewData")
-    _testPie1.setData(_pieData2)
-}
-
-
-
-/*
-TEST FUNCTIONS END
- */
-
-
-
-
-//
-function initCharts(){
-    _pieModel = Backbone.Model.extend({});
-    _pieController = Backbone.Collection.extend({});
-
-    drawPieChart()
-}
-
-//
-function drawPieChart(){
-    // Create the data table.
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
-    data.addRows([
-        ['Mushrooms', 3],
-        ['Onions', 1],
-        ['Olives', 1],
-        ['Zucchini', 1],
-        ['Pepperoni', 2]
-    ]);
-
-    // Set chart options -
-    var options = {'title':'How Much Pizza I Ate Last Night',
-        'width':400,
-        'height':300,
-        'colors': ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
-        'backgroundColor' : '#666666'
-    };
-
-    // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-}
-//
-function testCircleScript(){
-
-   var  svg = d3.select('.little');
-   var  circle = d3.selectAll("circle").transition()
-       .duration(750)
-       .delay(100)
-       .attr("r", 30)
-       .style("fill", "red");
-}
-
