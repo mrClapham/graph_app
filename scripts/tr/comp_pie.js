@@ -32,6 +32,10 @@ function Comp_pie(data){
                 scope.controller.initSVG();
                 scope.controller.draw();
             },
+            clear:function(){
+                d3.select("svg").remove()
+
+            },
             draw:function(){
                 scope.controller.initColours();
                 scope.controller.initPie();
@@ -118,12 +122,16 @@ function Comp_pie(data){
 
     scope.setData=function(value){
        scope.model.data = value;
-       scope.controller.initPie();
-       scope.controller.update();
+        scope.controller.clear();
+       scope.controller.init();
 
     }
 
     scope.controller.init();
+    this.setData = function(data){
+        scope.model.data = data
+        scope.controller.update();
+    }
 
     return scope;
 

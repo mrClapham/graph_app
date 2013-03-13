@@ -1,4 +1,11 @@
 /**
+ * These are Constant to be used throughout the application for Events, etc.
+ * @type {{STATE_CHANGE: string}}
+ */
+var CONSTANTS ={
+    STATE_CHANGE:'stateChange'
+}
+/**
  * This is the base class for all the UI widgets. It is not a class to be used in its own right but to be extended.
  * It has model, view and controller Objects.
  * 'model': stores data, eg: width, height, text colour, graph data etc.
@@ -7,16 +14,12 @@
  * 'controller' stores any private functions not exposed via the api.
  *
  */
-
-
 function Core(){
     var t = this
-    this.STATE_CHANGE=function(){return 'stateChange'};
 
     t.onStateChange=function(e){
-        alert("State has changed")
+        //
     }
-    //alert("INIT CORE")
 }
 /**
  *
@@ -96,12 +99,14 @@ Core.prototype.onModelChanged = function(e){
  * @param value
  */
 Core.prototype.set = function(id, value){
-    console.log("this.model[id] = "+this.model[id]);
+    //console.log("this.model[id] = "+this.model[id]);
+    console.log("_____________________________________________________________");
+
     console.log('SET has been called id = '+id+" value = "+value );
         try{
             if(this.get(id) != value){
                 this.model[id]=value;
-                this.fire('stateChange', {id:id, value:value})
+                this.fire(CONSTANTS.STATE_CHANGE, {id:id, value:value})
             }
         }catch(e){
             console.log(e)
@@ -118,6 +123,12 @@ Core.prototype.get = function(id){
 }
 
 /* Static funtions here */
+/**
+ * Extend creates a Class which extends the Core Class via prototyping.
+ * It is a shortcut helper class.
+ * @param classType
+ * @param construc
+ */
 Core.extend = function(classType,construc){
     classType.prototype = new Core();
     classType.prototype.constructor=construc;

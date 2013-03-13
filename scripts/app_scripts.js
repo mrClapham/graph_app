@@ -43,12 +43,41 @@ $(document).ready(function(){
 
 
 function init(){
-    alert("HELLOOOO")
     init_tests();
 }
 //
 function init_tests(){
 
-     _testPie1 = new Comp_pie(_pieData);
+     _testPie1 = new Comp_pie(generateDummyPieDate());
+
+}
+
+function generateDummyPieDate(){
+    console.log("DUMMY DATA")
+    var controller = {
+        generateRandom:function(min, max){
+            return Math.random() * (max - min) + min;
+
+        }
+    }
+    var _pieData =
+        [
+            {"label": "First item", "value": controller.generateRandom(80, 900)},
+            {"label": "Second item", "value": controller.generateRandom(80, 900)},
+            {"label": "Third item", "value": controller.generateRandom(80, 900)},
+            {"label": "Fourth item", "value": controller.generateRandom(80, 900)},
+            {"label": "Fifth item", "value": controller.generateRandom(80, 900)},
+            {"label": "Sixth item", "value": controller.generateRandom(80, 900)},
+            {"label": "Seventh item", "value": controller.generateRandom(80, 900)},
+
+        ];
+    return _pieData
+}
+
+var _timer1 = 0
+initTimedData();
+
+function initTimedData(targ){
+    _timer = self.setInterval(function(){_testPie1.setData( generateDummyPieDate() )}, 3000);
 
 }
