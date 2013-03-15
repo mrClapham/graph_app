@@ -135,3 +135,55 @@ Core.extend = function(classType,construc){
 }
 
 
+//-- for accessing JSONP feeds ---
+
+Core.createXMLHttp = function() {
+
+    console.log('Initializing our object')
+    //Initializing our object
+    var xmlHttp = null;
+    console.log('if XMLHttpRequest is available then creating and returning it')
+    //if XMLHttpRequest is available then creating and returning it
+    if (typeof(XMLHttpRequest) != undefined) {
+        xmlHttp = new XMLHttpRequest;
+        return xmlHttp;
+        console.log('if window.ActiveXObject is available than the user is using IE...so we have to create the newest version XMLHttp object')
+        //if window.ActiveXObject is available than the user is using IE...so we have to create the newest version XMLHttp object
+    } else if (window.ActiveXObject) {
+        var ieXMLHttpVersions = ['MSXML2.XMLHttp.5.0', 'MSXML2.XMLHttp.4.0', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp', 'Microsoft.XMLHttp'];
+        console.log('In this array we are starting from the first element (newest version) and trying to create it. If there is an exception thrown we are handling it (and doing nothing ^^)')
+
+        //In this array we are starting from the first element (newest version) and trying to create it. If there is an
+        //exception thrown we are handling it (and doing nothing ^^)
+        for (var i = 0; i < ieXMLHttpVersions.length; i++) {
+            try {
+                xmlHttp = new ActiveXObject(ieXMLHttpVersions[i]);
+                return xmlHttp;
+            } catch (e) {
+            }
+        }
+    }
+}
+
+Core.getJson = function(url, callbackFunc){
+    var xmlHttp = Core.createXMLHttp();
+
+    xmlHttp.open('get', url, true);
+    xmlHttp.send(null);
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState === 4) {
+            if (xmlHttp.status === 200) {
+                alert(xmlHttp.responseText);
+            } else {
+                console.log('Error: ' + xmlHttp.responseText);
+            }
+        } else {
+            //still loading
+        }
+    };
+}
+
+
+Core.getJson('http://gomashup.com/json.php?fds=geo/international/areacodes/country/Afghanistan', null)
+
+

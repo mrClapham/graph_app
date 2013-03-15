@@ -22,7 +22,6 @@ var _pieData =
         {"label": "Last", "value": "150"}
     ];
 
-
 var _pieData2 =
     [
         {"label": "XX First item", "value": "200"},
@@ -35,7 +34,6 @@ var _pieData2 =
     ];
 
 var _testPie1
-
 
 $(document).ready(function(){
     init();

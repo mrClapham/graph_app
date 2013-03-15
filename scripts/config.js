@@ -18,7 +18,8 @@ require.config({
         comp_pie: "../scripts/tr/comp_pie",
         DataVisBase:"../scripts/tr/DataVisBase",
         DataVisClass:"../scripts/tr/DataVisClass",
-        Core: "../scripts/tr/Core"
+        Core: "../scripts/tr/Core",
+        TesterDataVis: "../scripts/tr/TesterDataVis"
     },
 
   shim: {
@@ -32,7 +33,7 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
 
      // The main non-boilerpalte app javaScript
-      "app_scripts" :["Core","jquery", "d3v3", "comp_pie","DataVisBase","DataVisClass"],
+      "app_scripts" :["Core","jquery", "d3v3", "comp_pie","DataVisBase","DataVisClass","TesterDataVis"],
 
      // Pie component
       "..scripts/tr/comp_pie.js" : ["d3v3"]
