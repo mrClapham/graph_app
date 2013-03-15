@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+
+<style>
+    body{
+        background-color: #181818;
+        color: #ffffff;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+    .chart {
+        font: 10px sans-serif;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+
+    .chart rect {
+        stroke: #2c2c2c;
+        fill: #ea7d23;
+    }
+
+    .chart{
+        /*background-color: #242424;*/
+
+    }
+
+
+    #chart1Holder{
+        /*
+            height: 600px;
+            display: block;
+            */
+        position: relative;
+
+    }
+
+
+</style>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title></title>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width"/>
+
+<link rel="stylesheet" href="stylesheets/screen.css"/>
+<link rel="stylesheet" href="stylesheets/datavis.css"/>
+
+
+<script type="text/javascript">
+    var par
+    function pTest(){
+        par = d3.select(".parHold").selectAll("p")
+                .data(generateDummyPieDate())
+                .text('String');
+
+        // Enter…
+        par.enter().append("p")
+                .text(function(d){return 'String enter '+d.value});
+
+        // Exit…
+        par.exit().remove();
+    }
+
+    //-- GEnerat dummy data --/
+
+    function generateDummyPieDate(){
+        var controller = {
+            generateRandom:function(min, max){
+                return Math.floor(Math.random() * (max - min) + min);
+            },
+            generateNode:function(){
+                return {"label": "Random", "value": controller.generateRandom(80, 900)}
+            }
+        }
+        var _pieData =
+                [
+                    {"label": "First item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Second item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Third item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Fourth item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Fifth item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Sixth item", "value": controller.generateRandom(80, 900)},
+                    {"label": "Seventh item", "value": controller.generateRandom(80, 900)},
+
+                ];
+
+        for(var i = 0; i<Math.ceil(Math.random()*6); i++){
+            _pieData.push( controller.generateNode() );
+        }
+
+        this.getJSON = function(){
+            return _pieData
+        }
+        return _pieData
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    //--- BAR CHART ---
+
+    function drawBarChart(data){
+
+        w = 300
+        h=150
+        bar_h=8
+        font_size = 14
+
+        var chart = d3.select("#chart1Holder").append("svg")
+                .attr("class", "chart")
+                .attr("width", w)
+                .attr("height", h);
+
+        var theMax = d3.max(data, function(d) { return d['value']; });
+
+        var x_scale = d3.scale.linear()
+                .domain([0, theMax])
+                .range([0, w]);
+// Y position 
+        var y_scale = d3.scale.ordinal()
+                .domain(data)
+                .rangeBands([0, 120]);
+
+        console.log("y_scale ----- "+y_scale(100))
+
+//--    bar_h = h/data.length; 
+
+        var ticks = x_scale.ticks(10);
+
+        chart.selectAll("line")
+                .data(x_scale.ticks(10))
+                .enter().append("line")
+                .attr("x1", x_scale)
+                .attr("x2", x_scale)
+                .attr("y1", 0)
+                .attr("y2", h)
+                .style("stroke", "#2c2c2c");
+
+
+        chart.selectAll("line")
+                .data(data)
+                .enter().append("line")
+                .attr("x1", 0)
+                .attr("x2", w)
+                .attr("y1", function(d,i){return i * bar_h;  })
+                .attr("y2", h)
+                .style("stroke", "#2c2c2c");
+
+        chart.selectAll("rect")
+                .data(data)
+                .enter().append("rect")
+                .attr("y", function(d, i) { return i * bar_h; })
+                .attr("width", function(d, i) { return x_scale( d['value'] ); })
+                .attr("height", bar_h);
+
+        chart.selectAll("text")
+                .data(data)
+                .enter().append("text")
+                .attr("x", function(d, i) { return x_scale( d['value'] ); })
+                .attr("y", function(d, i) { return font_size +(i * bar_h); })
+                .attr("dx", -3) // padding-right
+                .attr("dy", ".10px") // vertical-align: middle
+                .attr("color", "#ff00ff") //
+                .attr("text-anchor", "end") // text-align: right
+                .text(function(d,i){return d['label']+" - "+d['value']});
+
+        var chart = d3.select("#chart1Holder").append("svg")
+                .attr("class", "chart")
+                .attr("width", w)
+                .attr("height", h)
+                .append("g")
+                .attr("transform", "translate(10,15)");
+
+        //--- update data
+        this.redraw = function() {
+            console.log("redrw")
+
+            var chart = d3.selectAll("rect")
+                    .data(generateDummyPieDate())
+                    .transition()
+                    .duration(1000)
+                    .attr("y", function(d, i) { return i * bar_h; })
+                    .attr("width", function(d, i) { return x_scale( d['value'] ); })
+                    .attr("height", bar_h)
+                    .exit().remove();
+        }
+
+        var si = setInterval(function(){
+            redraw()
+        }, 3000)
+    }
+
+
+
+    //--- BAR CHART ---
+    ///////////////////////////////////////////////////////////////////////////////////
+
+    function onDocLoaded(){
+        pTest();
+        drawBarChart( generateDummyPieDate() );
+    }
+
+    setTimeout(function(){par.data(["a", "b", "c", "xxxxx", " --- ", "zzz"]);console.log("data changed")}, 2000);
+
+</script>
+
+
+</head>
+<body onLoad="onDocLoaded()">
+
+
+
+
+<!-- Main container. -->
+<div role="main" id="main" class="container">
+
+    <div class="parHold">
+        <h3>Para hold 1</h3>
+    </div>
+
+    <div class="parHold">
+        <h3>Para hold 2</h3>
+
+    </div>
+
+
+    <div class = 'datavis_holder'>
+        <p>A graph generated by dummy data</p>
+        <div class='datavis_inner'>
+            <div id="chart1Holder" >
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- build:js scripts/amd-app.js -->
+<script type="text/javascript" src="scripts/libs/d3.v3.js"></script>
+
+<!-- endbuild -->
+
+
+<!--         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
+ -->
+
+</body>
+</html>
