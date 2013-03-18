@@ -57,6 +57,7 @@ DataVisClass.prototype.testInherit = function(){
 Core.extend(DataVisClass, 'DataVisClass');
 
 DataVisClass.extendDv = function(classType,construc){
+    Core.extend(DataVisClass, 'DataVisClass');
     classType.prototype = new DataVisClass();
     classType.prototype.constructor=construc;
 }

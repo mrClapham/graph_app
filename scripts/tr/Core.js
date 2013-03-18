@@ -17,8 +17,9 @@ var CONSTANTS ={
 function Core(){
     var t = this
 
-    t.onStateChange=function(e){
+    this.onStateChange=function(e){
         //
+        alert("CORE DATA CHANGE...")
     }
 }
 /**
@@ -35,13 +36,11 @@ Core.prototype={
         if (scope._listeners== "undefined"){
             scope._listeners = {};
         }
-
             if (typeof scope._listeners[type] == "undefined"){
             scope._listeners[type] = [];
         }
         scope._listeners[type].push(listener);
     },
-
     fire: function(event, data){
         if (typeof event == "string"){
             event = { type: event };
@@ -130,6 +129,13 @@ Core.prototype.get = function(id){
  * @param construc
  */
 Core.extend = function(classType,construc){
+
+   // alert("CORE EXTEND CALLED"+classType)
+    for(var prop in classType){
+        console.log(prop+" : "+ classType[prop])
+    }
+
+
     classType.prototype = new Core();
     classType.prototype.constructor=construc;
 }
@@ -184,6 +190,6 @@ Core.getJson = function(url, callbackFunc){
 }
 
 
-Core.getJson('http://gomashup.com/json.php?fds=geo/international/areacodes/country/Afghanistan', null)
+// Core.getJson('http://gomashup.com/json.php?fds=geo/international/areacodes/country/Afghanistan', null)
 
 

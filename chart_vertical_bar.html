@@ -5,7 +5,6 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
 
-
 <style>
     body{
         background-color: #181818;
@@ -23,7 +22,6 @@
         left: 0;
     }
 
-
     .chart rect {
         stroke: #2c2c2c;
         fill: #ea7d23;
@@ -33,7 +31,6 @@
         /*background-color: #242424;*/
 
     }
-
 
     #chart1Holder{
         /*
@@ -58,21 +55,9 @@
 
 
 <script type="text/javascript">
-    var par
-    function pTest(){
-        par = d3.select(".parHold").selectAll("p")
-                .data(generateDummyPieDate())
-                .text('String');
 
-        // Enter…
-        par.enter().append("p")
-                .text(function(d){return 'String enter '+d.value});
 
-        // Exit…
-        par.exit().remove();
-    }
-
-    //-- GEnerat dummy data --/
+    //-- Generate dummy data --/
 
     function generateDummyPieDate(){
         var controller = {
@@ -104,6 +89,161 @@
         }
         return _pieData
     }
+
+/////////////////////// MVC version of the bar chart
+
+function verticalBarChart(container, data){
+var scope = {
+    model:{
+        heading: "Graph example 1",
+        width:250,
+        height:200,
+        margin_top:30,
+        margin_left:10,
+        margin_right:10,
+        margin_bottom:10,
+        margin_bars:9, //The margin between the bars
+        timestamp:new Date(),
+        data:data,
+        selected:0,
+        chartClass:'chart_class',
+        graph_width:function(){
+            // The width left for the actual chart once the margins are removed
+            return scope.model.width - (scope.model.margin_left+scope.model.margin_right)
+        },
+        graph_height:function(){
+            // The height left for the actual chart once the margins are removed
+            return scope.model.height - (scope.model.margin_top+scope.model.margin_bottom)
+        },
+        dataMax:function(){return  d3.max(scope.model.data, function(d) { return d['value']; })   },
+        y_scale:function(evt){return d3.scale.linear()
+                .domain([0, scope.model.dataMax()])
+                .range([0, scope.model.graph_height-2]);
+        },
+
+        bar_width:15,
+        bar_height:80,
+    },
+    view:{
+        container: container,
+        chart:null,
+        svg:null,
+        displayContainer:function(){
+            return ""//<div class='"+scope.model.chartClass+"'>"+scope.model.heading+"</div>";
+        },
+        rect:null,
+        bars:[]
+    },
+    controller:{
+        init:function(){
+            //alert(scope.view.container.id);
+            scope.view.container.innerHTML = scope.view.displayContainer();
+//            scope.view.chart = d3.select(scope.view.chart).append("svg")
+//                    .attr("class", scope.model.chartClass)
+//                    .attr("width", scope.model.width)
+//                    .attr("height", scope.model.height);
+            scope.controller.initDrawing();
+        },
+        getContainerId:function(){return '#'+String(scope.view.container.id) },
+        initDrawing:function(){
+            scope.view.chart = d3.select(scope.controller.getContainerId()).append("svg")
+                    .attr("class", scope.model.chartClass)
+                    .attr("width", scope.model.width )
+                    .attr("height", scope.model.height)
+
+            scope.controller.redraw()
+
+        },
+        redraw:function() {
+
+        scope.view.rect = scope.view.chart.selectAll("rect")
+                .data(scope.model.data, function(d) { return d.value; });
+
+            // the available width is the full graph width - the amound of margin there will be between the bars
+        var __availableWidth = scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length- 1) )
+
+          var y_scale =  d3.scale.linear()
+                    .domain([0, scope.model.dataMax()])
+                    .range([0, scope.model.height]);
+
+            var __barOffset  = Math.floor( __availableWidth /scope.model.data.length)+scope.model.margin_bars
+        scope.view.rect.enter().insert("rect", "line")
+                .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
+                .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
+                .attr("width", __barOffset-scope.model.margin_bars/3)
+                .attr("height",function(d,i){return y_scale( d.value)/3})
+                //.attr("height", function(d, i) { return scope.model.y_scale( d['value'] )})
+                .style({"stroke":"#cccccc", 'fill':'#990900'});
+
+            // Update…
+        scope.view.rect.transition()
+                .duration(1000)
+                .attr("height", function(d) { return y_scale( d.value) })
+                .attr("width", function(d) { return __barOffset-scope.model.margin_bars })
+
+            // Exit…
+        scope.view.rect.exit()
+                .remove();
+        },
+        update:function(){
+            var __availableWidth = scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length- 1) )
+
+            var __barOffset  = Math.floor( __availableWidth /scope.model.data.length)+scope.model.margin_bars
+
+            var y_scale =  d3.scale.linear()
+                    .domain([0, scope.model.dataMax()])
+                    .range([0, scope.model.height]);
+
+            scope.view.rect = scope.view.chart.selectAll("rect")
+                    .data(scope.model.data, function(d) { return d.value; });
+
+            scope.view.rect.enter().insert("rect", "line")
+                    .attr("height", function(d) { return y_scale( d.value) })
+                    .attr("width", function(d) { return __barOffset-scope.model.margin_bars })
+                    .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
+                    .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
+                    .style({"stroke":"#cccccc", 'fill':'#990900'});
+
+
+            // Update…
+            scope.view.rect.transition()
+                    .duration(1000)
+                    .attr("height", function(d) { return y_scale( d.value) })
+                    .attr("width", function(d) { return __barOffset-scope.model.margin_bars })
+                    .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
+                    .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
+
+                    .style({"stroke":"#cccccc", 'fill':'#990900'});
+
+            // Exit…
+            scope.view.rect.exit()
+                    .remove();
+
+
+
+
+        }
+    }
+}
+    scope.controller.init()
+//----------- PUBLIC FUNCTIONS ---------------
+
+    scope.onStateChange = function(e){
+        console.log("ON STATE CHANGE IN CHILD id = "+ e.data.id)
+    }
+
+    scope.setData = function(value){
+        scope.model.data = value;
+        scope.controller.update();
+
+    }
+
+
+    return scope;
+
+
+}
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////
@@ -206,11 +346,23 @@
     ///////////////////////////////////////////////////////////////////////////////////
 
     function onDocLoaded(){
-        pTest();
-        drawBarChart( generateDummyPieDate() );
+       // drawBarChart( generateDummyPieDate() );
+        //
+        var targ1= document.getElementById('chart1Holder2')
+
+
+        //DataVisClass.extendDv(verticalBarChart, 'verticalBarChart')
+
+        var vlc = new verticalBarChart(targ1, generateDummyPieDate())
+
+
+        var si = setInterval(function(){
+            ////
+            vlc.setData( generateDummyPieDate() )
+        }, 6000)
+
     }
 
-    setTimeout(function(){par.data(["a", "b", "c", "xxxxx", " --- ", "zzz"]);console.log("data changed")}, 2000);
 
 </script>
 
@@ -224,16 +376,9 @@
 <!-- Main container. -->
 <div role="main" id="main" class="container">
 
-    <div class="parHold">
-        <h3>Para hold 1</h3>
-    </div>
-
-    <div class="parHold">
-        <h3>Para hold 2</h3>
-
-    </div>
 
 
+<!-- graph cell -->
     <div class = 'datavis_holder'>
         <p>A graph generated by dummy data</p>
         <div class='datavis_inner'>
@@ -242,12 +387,24 @@
             </div>
         </div>
     </div>
+    <!-- graph cell -->
+    <!-- graph cell -->
+    <div class = 'datavis_holder'>
+        <p>A graph generated by dummy data two</p>
+        <div class='datavis_inner'>
+            <div id="chart1Holder2" >
 
+            </div>
+        </div>
+    </div>
+    <!-- graph cell -->
 
 </div>
 
 <!-- build:js scripts/amd-app.js -->
 <script type="text/javascript" src="scripts/libs/d3.v3.js"></script>
+<script type="text/javascript" src="scripts/tr/Core.js"></script>
+<script type="text/javascript" src="scripts/tr/DataVisClass.js"></script>
 
 <!-- endbuild -->
 
