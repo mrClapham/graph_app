@@ -1,0 +1,120 @@
+
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Import the non-default scaffolding module.
+@import "blueprint/scaffolding";
+
+// To generate css equivalent to the blueprint css but with your
+// configuration applied, uncomment:
+// @include blueprint
+
+// If you are doing a lot of stylesheet concatenation, it is suggested
+// that you scope your blueprint styles, so that you can better control
+// what pages use blueprint when stylesheets are concatenated together.
+body.bp {
+  @include blueprint-typography(true);
+  @include blueprint-utilities;
+  @include blueprint-debug;
+  @include blueprint-interaction;
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+}
+
+form.bp {
+  @include blueprint-form;
+  // You'll probably want to remove the scaffolding once you start styling your site.
+  @include blueprint-scaffolding;
+}
+
+// Page layout can be done using mixins applied to your semantic classes and IDs:
+body.two-col {
+  #container {
+    @include container;
+  }
+  #header, #footer {
+    @include column($blueprint-grid-columns);
+  }
+  #sidebar {
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    $sidebar-columns: floor($blueprint-grid-columns / 3);
+    @include column($sidebar-columns);
+  }
+  #content {
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+    // true means it's the last column in the row
+    @include column($content-columns, true);
+  }
+}
+
+
+
+
+
+
+$panelWidth: 340px;
+$chrome_padding: 8px;
+$border_highlight: #303030;
+
+@mixin black-grad{
+	// needs latest Compass, add '@import "compass"' to your scss
+background-color: #2a2a2b; // Old browsers
+@include filter-gradient(#2a2a2b, #000000, vertical); // IE6-9
+@include background-image(linear-gradient(top,  #2a2a2b 0%,#000000 100%));
+
+}
+
+@mixin three_d_border_out{
+	border: 1px solid #000000;
+	border-right: 1px solid $border_highlight;
+}
+
+@mixin three_d_border_in{
+	border: 1px solid #000000;
+	border-left: 1px solid $border_highlight;
+	border-bottom: 1px solid $border_highlight;
+}
+
+@mixin inset_shadow{
+	-webkit-box-shadow: inset -1px 1px 1px 1px rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 1px 1px 1px rgba(0, 0, 0, .25);
+}
+
+
+.datavis_holder{
+	width:$panelWidth;	
+	@include black-grad;
+	@include three_d_border_out;
+	z-index: 100;
+	min-height: 250px;
+	display: block;
+	p{
+		font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		color: #cccccc;
+		font-size: 11px;
+		line-height: 14px;
+		font-weight: 100;
+		display: block;
+		padding: 4px $chrome_padding 4px $chrome_padding;
+	}
+}
+
+.datavis_inner{
+	width:auto;	
+	@include black-grad;
+	@include three_d_border_in;
+	display: block;
+	margin: $chrome_padding;
+	min-height: 200px;
+	@include inset_shadow;
+
+}
+
