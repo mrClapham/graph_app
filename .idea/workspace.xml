@@ -6,7 +6,7 @@
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363628903919" ignored="false" />
+    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363628964011" ignored="false" />
     <file path="/DataVisBase.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362669202184" ignored="false" />
     <file path="/InheritTest.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362666759824" ignored="false" />
     <file path="/app_scripts.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363171777138" ignored="false" />
@@ -520,7 +520,11 @@
       <created>1363628914504</created>
       <updated>1363628914504</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="more css/scss">
+      <created>1363628966813</created>
+      <updated>1363628966813</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -609,7 +613,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="All the css/scss" />
+    <option name="LAST_COMMIT_MESSAGE" value="more css/scss" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -641,6 +645,7 @@
     <MESSAGE value="It's a horizontal bar chart at the moment and it's a bit hard coded but it animates" />
     <MESSAGE value="General updates Fri 15th - stable version" />
     <MESSAGE value="All the css/scss" />
+    <MESSAGE value="more css/scss" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
