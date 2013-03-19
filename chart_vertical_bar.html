@@ -107,6 +107,10 @@ var scope = {
         data:data,
         selected:0,
         chartClass:'chart_class',
+        ticksClassHorizontal:'ticks_h',
+        ticksClassVertical:'ticks_v',
+        ticksClassVerticalColor:'#ff00ff',
+        ticksClassHorizontalColor:'#ff88ff',
         graph_width:function(){
             // The width left for the actual chart once the margins are removed
             return scope.model.width - (scope.model.margin_left+scope.model.margin_right)
@@ -115,12 +119,13 @@ var scope = {
             // The height left for the actual chart once the margins are removed
             return scope.model.height - (scope.model.margin_top+scope.model.margin_bottom)
         },
+        availableWidth:function(){return scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length - 1)) },
+        barOffset:function(){return Math.floor( scope.model.availableWidth() /scope.model.data.length)+scope.model.margin_bars},
         dataMax:function(){return  d3.max(scope.model.data, function(d) { return d['value']; })   },
         y_scale:function(evt){return d3.scale.linear()
                 .domain([0, scope.model.dataMax()])
                 .range([0, scope.model.graph_height-2]);
         },
-
         bar_width:15,
         bar_height:80,
     },
@@ -129,19 +134,17 @@ var scope = {
         chart:null,
         svg:null,
         displayContainer:function(){
-            return ""//<div class='"+scope.model.chartClass+"'>"+scope.model.heading+"</div>";
+            return "<div class='"+scope.model.chartClass+"'>"+scope.model.heading+"</div>";
         },
         rect:null,
+        horizontalTicks:null,
         bars:[]
     },
     controller:{
         init:function(){
             //alert(scope.view.container.id);
             scope.view.container.innerHTML = scope.view.displayContainer();
-//            scope.view.chart = d3.select(scope.view.chart).append("svg")
-//                    .attr("class", scope.model.chartClass)
-//                    .attr("width", scope.model.width)
-//                    .attr("height", scope.model.height);
+
             scope.controller.initDrawing();
         },
         getContainerId:function(){return '#'+String(scope.view.container.id) },
@@ -150,8 +153,17 @@ var scope = {
                     .attr("class", scope.model.chartClass)
                     .attr("width", scope.model.width )
                     .attr("height", scope.model.height)
+                    .style({"stroke":"#cccccc", 'fill':'#990900', 'position':'absolute'});
 
-            scope.controller.redraw()
+            //Create the horizontalTicks
+            scope.view.horizontalTicks = d3.select(scope.controller.getContainerId()).append("svg")
+                    .attr("class", scope.model.ticksClassHorizontal)
+                    .attr("width", scope.model.width )
+                    .attr("height", scope.model.height)
+                    .attr("position", "absolute")
+                    .style({"stroke":"#cccccc", 'fill':'#990900', 'position':'absolute'});
+
+            scope.controller.update()
 
         },
         redraw:function() {
@@ -159,17 +171,16 @@ var scope = {
         scope.view.rect = scope.view.chart.selectAll("rect")
                 .data(scope.model.data, function(d) { return d.value; });
 
-            // the available width is the full graph width - the amound of margin there will be between the bars
-        var __availableWidth = scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length- 1) )
-
-          var y_scale =  d3.scale.linear()
+            var y_scale =  d3.scale.linear()
                     .domain([0, scope.model.dataMax()])
-                    .range([0, scope.model.height]);
+                    .range([0, scope.model.graph_height()]);
+
+            console.log( "Y_SCALE"+scope.model.y_scale() )
 
             var __barOffset  = Math.floor( __availableWidth /scope.model.data.length)+scope.model.margin_bars
         scope.view.rect.enter().insert("rect", "line")
                 .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
-                .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
+                .attr("y", function(d,i){return 90-scope.model.graph_height()} )
                 .attr("width", __barOffset-scope.model.margin_bars/3)
                 .attr("height",function(d,i){return y_scale( d.value)/3})
                 //.attr("height", function(d, i) { return scope.model.y_scale( d['value'] )})
@@ -188,30 +199,48 @@ var scope = {
         update:function(){
             var __availableWidth = scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length- 1) )
 
-            var __barOffset  = Math.floor( __availableWidth /scope.model.data.length)+scope.model.margin_bars
+           // var __barOffset  = Math.floor( __availableWidth /scope.model.data.length)+scope.model.margin_bars
 
             var y_scale =  d3.scale.linear()
                     .domain([0, scope.model.dataMax()])
-                    .range([0, scope.model.height]);
+                    .range([0, scope.model.graph_height()]);
 
+
+
+            var yTicks = y_scale.ticks(10)
+
+
+            scope.view.horizontalTicks.selectAll("line")
+                    .data(y_scale.ticks(10))
+                    .enter().append("line")
+                    .attr("x1", 0)
+                    .attr("x2", scope.model.graph_width() )
+                    .attr("y1", y_scale)
+                    .attr("y2", y_scale)
+                    .style("stroke", scope.model.ticksClassHorizontalColor);
+
+            scope.view.horizontalTicks
+                    .exit.remove();
+
+            //console.log(yTicks)
             scope.view.rect = scope.view.chart.selectAll("rect")
                     .data(scope.model.data, function(d) { return d.value; });
 
             scope.view.rect.enter().insert("rect", "line")
-                    .attr("height", function(d) { return y_scale( d.value) })
-                    .attr("width", function(d) { return __barOffset-scope.model.margin_bars })
-                    .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
-                    .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
-                    .style({"stroke":"#cccccc", 'fill':'#990900'});
+                   // .attr("height", function(d) { return y_scale( d.value) })
+                    .attr("width", function(d) { return scope.model.barOffset() - scope.model.margin_bars })
+                    .attr("y", function(d,i){return scope.model.graph_height()+10+scope.model.margin_top} )
+                    .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset() *i); })
+                    .style({"stroke":"#cccccc", 'fill':'#00ff00'});
 
 
             // Update…
             scope.view.rect.transition()
-                    .duration(1000)
+                    .duration(600)
                     .attr("height", function(d) { return y_scale( d.value) })
-                    .attr("width", function(d) { return __barOffset-scope.model.margin_bars })
+                    .attr("width", function(d) { return scope.model.barOffset()-scope.model.margin_bars })
                     .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
-                    .attr("x", function(d, i) { return scope.model.margin_left+( __barOffset*i); })
+                    .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset()*i); })
 
                     .style({"stroke":"#cccccc", 'fill':'#990900'});
 
@@ -337,7 +366,7 @@ var scope = {
 
         var si = setInterval(function(){
             redraw()
-        }, 3000)
+        }, 1000)
     }
 
 
