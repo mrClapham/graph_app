@@ -211,7 +211,7 @@ var scope = {
 
 
             scope.view.horizontalTicks.selectAll("line")
-                    .data(y_scale.ticks(10))
+                    .data(y_scale.ticks(Math.random()*20))
                     .enter().append("line")
                     .attr("x1", 0)
                     .attr("x2", scope.model.graph_width() )
@@ -219,19 +219,19 @@ var scope = {
                     .attr("y2", y_scale)
                     .style("stroke", scope.model.ticksClassHorizontalColor);
 
-            scope.view.horizontalTicks
-                    .exit.remove();
+//            scope.view.horizontalTicks
+//                    .exit.remove();
 
             //console.log(yTicks)
             scope.view.rect = scope.view.chart.selectAll("rect")
                     .data(scope.model.data, function(d) { return d.value; });
 
             scope.view.rect.enter().insert("rect", "line")
-                   // .attr("height", function(d) { return y_scale( d.value) })
+                   // .attr("height", function(d) { return this.attr( 'height') })
                     .attr("width", function(d) { return scope.model.barOffset() - scope.model.margin_bars })
                     .attr("y", function(d,i){return scope.model.graph_height()+10+scope.model.margin_top} )
                     .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset() *i); })
-                    .style({"stroke":"#cccccc", 'fill':'#00ff00'});
+                    .style({"stroke":"#ccc0cc", 'fill':'#00ff00'});
 
 
             // Update…
@@ -249,8 +249,6 @@ var scope = {
                     .remove();
 
 
-
-
         }
     }
 }
@@ -264,13 +262,8 @@ var scope = {
     scope.setData = function(value){
         scope.model.data = value;
         scope.controller.update();
-
     }
-
-
     return scope;
-
-
 }
 
 
