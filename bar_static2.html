@@ -99,10 +99,10 @@ function verticalBarChart(container, data){
             value_max:100,
             value_min:0,
             margin_top:30,
-            margin_left:50,
-            margin_right:20,
+            margin_left:30,
+            margin_right:30,
             margin_bottom:10,
-            margin_bars:12, //The margin between the bars
+            margin_bars:20, //The margin between the bars
             timestamp:new Date(),
             data:data,
             selected:0,
@@ -130,16 +130,17 @@ function verticalBarChart(container, data){
             bar_width:function(){return scope.model.barOffset() - scope.model.margin_bars},
             bar_height:80,
             //bar_colors:['#ea7d23', '#ff6666','#ff6699','#ff00ff'],
-            bar_colors:['#ea7d23', '#ff6666','#ff6699','#ff00ff'],
+            bar_colors:['#ff0066','#ea7d23', '#ff6666','#ff6699','#ff00ff'],
 
             get_bar_color:function(value){
-                value+=1
+
                 var __arrayLength = scope.model.bar_colors.length;
                 var __arrayPosition = value % __arrayLength;
                 return scope.model.bar_colors[__arrayPosition] ;
             },
             bar_color:'#ea7d23',
             bar_border_color:'#ea7d23',
+
 
         },
         view:{
@@ -164,14 +165,16 @@ function verticalBarChart(container, data){
                         .attr("class", scope.model.ticksClassHorizontal)
                         .attr("width", scope.model.width )
                         .attr("height", scope.model.height)
-                        .attr("transform", "translate(100,200)")
+                        //.attr("transform", "translate(400,200)")
                         .style({'position':'absolute', 'left':scope.model.margin_left+'px'})
-                        .style({"stroke":"#cccccc", 'fill':'#990900', 'position':'absolute'});
+                        .style({"stroke":"#cccccc", 'fill':'#990900'});
 
                 scope.view.chart = d3.select(scope.model.tar_id).append("svg")
                         .attr("class", "chart")
                         .attr("width", scope.model.width)
                         .attr("height", scope.model.height)
+                        .style({'position':'absolute', 'left':scope.model.margin_left+'px'})
+
 
                 //-- get the bars
                scope.view.chart.selectAll("rect")
