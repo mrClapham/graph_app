@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+
+<style>
+    body{
+        background-color: #181818;
+        color: #ffffff;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+    .chart {
+        font: 10px sans-serif;
+        text-align: right;
+        padding: 3px;
+        margin: 1px;
+        color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .chart rect {
+        stroke: #2c2c2c;
+        fill: #ea7d23;
+    }
+
+    .chart{
+        /*background-color: #242424;*/
+
+    }
+
+    #chart1Holder{
+        /*
+            height: 600px;
+            display: block;
+            */
+        position: relative;
+
+    }
+
+
+</style>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title></title>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width"/>
+
+<link rel="stylesheet" href="stylesheets/screen.css"/>
+<link rel="stylesheet" href="stylesheets/datavis.css"/>
+
+
+<script type="text/javascript">
+
+
+//-- Generate dummy data --/
+
+function generateDummyPieDate(min, max){
+    var controller = {
+        generateRandom:function(){
+            return Math.floor(Math.random() * (max - min) + min);
+        },
+        generateNode:function(){
+            return {"label": "Random", "value": controller.generateRandom()}
+        }
+    }
+    var _pieData =
+            [
+                {"label": "First item", "value": controller.generateRandom()},
+                {"label": "Second item", "value": controller.generateRandom()},
+                {"label": "Third item", "value": controller.generateRandom()},
+                {"label": "Fourth item", "value": controller.generateRandom()}
+
+
+            ];
+
+    for(var i = 0; i<Math.ceil(Math.random()*4); i++){
+        _pieData.push( controller.generateNode() );
+    }
+
+    this.getJSON = function(){
+        return _pieData
+    }
+    return _pieData
+}
+
+/////////////////////// MVC version of the bar chart
+
+function verticalBarChart(container, data){
+    var scope = {
+        model:{
+            tar_id:'#chart1Holder',
+            width:300,
+            height:200,
+            value_max:100,
+            value_min:0,
+            margin_top:30,
+            margin_left:50,
+            margin_right:20,
+            margin_bottom:10,
+            margin_bars:12, //The margin between the bars
+            timestamp:new Date(),
+            data:data,
+            selected:0,
+            chartClass:'chart_class',
+            ticksClassHorizontal:'ticks_h',
+            ticksClassVertical:'ticks_v',
+            ticksClassVerticalColor:'#2c2c2c',
+            ticksClassHorizontalColor:'#2c2c2c',
+            tick_divisions:100,
+            graph_width:function(){
+                // The width left for the actual chart once the margins are removed
+                return scope.model.width - (scope.model.margin_left+scope.model.margin_right)
+            },
+            graph_height:function(){
+                // The height left for the actual chart once the margins are removed
+                return scope.model.height - (scope.model.margin_top+scope.model.margin_bottom)
+            },
+            availableWidth:function(){return scope.model.graph_width() - (scope.model.margin_bars*( scope.model.data.length - 1)) },
+            barOffset:function(){return Math.floor( scope.model.availableWidth() /scope.model.data.length)+scope.model.margin_bars},
+            dataMax:function(){return  d3.max(scope.model.data, function(d) { return d['value']; })   },
+            y_scale:function(evt){return d3.scale.linear()
+                    .domain([0, scope.model.dataMax()])
+                    .range([0, scope.model.graph_height-2]);
+            },
+            bar_width:function(){return scope.model.barOffset() - scope.model.margin_bars},
+            bar_height:80,
+            //bar_colors:['#ea7d23', '#ff6666','#ff6699','#ff00ff'],
+            bar_colors:['#ea7d23', '#ff6666','#ff6699','#ff00ff'],
+
+            get_bar_color:function(value){
+                value+=1
+                var __arrayLength = scope.model.bar_colors.length;
+                var __arrayPosition = value % __arrayLength;
+                return scope.model.bar_colors[__arrayPosition] ;
+            },
+            bar_color:'#ea7d23',
+            bar_border_color:'#ea7d23',
+
+        },
+        view:{
+            chart:null,
+            container: container,
+            chart:null,
+            svg:null,
+            displayContainer:function(){
+                return "<div class='"+scope.model.chartClass+"'>"+scope.model.heading+"</div>";
+            },
+            horizontalTicks:null
+        },
+        controller:{
+            draw:function(){
+                console.log("draw "+scope.model.data)
+
+                var y_scale =  d3.scale.linear()
+                        .domain([0, scope.model.dataMax()])
+                        .range([scope.model.graph_height(), 0]);
+
+                scope.view.horizontalTicks = d3.select(scope.model.tar_id).append("svg")
+                        .attr("class", scope.model.ticksClassHorizontal)
+                        .attr("width", scope.model.width )
+                        .attr("height", scope.model.height)
+                        .attr("transform", "translate(100,200)")
+                        .style({'position':'absolute', 'left':scope.model.margin_left+'px'})
+                        .style({"stroke":"#cccccc", 'fill':'#990900', 'position':'absolute'});
+
+                scope.view.chart = d3.select(scope.model.tar_id).append("svg")
+                        .attr("class", "chart")
+                        .attr("width", scope.model.width)
+                        .attr("height", scope.model.height)
+
+                //-- get the bars
+               scope.view.chart.selectAll("rect")
+                       .data(scope.model.data)
+                       .enter().append('rect')
+                       .attr('width', scope.model.bar_width)
+                       .attr('height', function(d,i){return y_scale(d.value)})
+                       .attr('x', function(d,i){return (scope.model.margin_bars+scope.model.bar_width())*i})
+                       .attr('y', function(d, i) { return scope.model.graph_height()-y_scale(d.value)})
+                       .style({"stroke":scope.model.bar_border_color})
+                       .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)})            ;
+
+                //chart.exit().remove();
+            },
+
+       redraw: function () {
+
+        var y_scale =  d3.scale.linear()
+                   .domain([0, scope.model.dataMax()])
+                   .range([scope.model.graph_height(), 0]);
+
+        var rect = scope.view.chart.selectAll("rect")
+                .data(scope.model.data);
+        // Enter…
+        rect.enter().insert("rect")
+                .attr('width', scope.model.bar_width)
+                .attr('height', function(d,i){return y_scale(d.value)})
+                .attr('x', function(d,i){return (scope.model.margin_bars+scope.model.bar_width())*i})
+                .attr('y', function(d, i) { return scope.model.graph_height()-y_scale(d.value)})
+                .style({"stroke":scope.model.bar_border_color})
+                .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)})            ;
+
+        // Update…
+        rect.transition()
+                .duration(1000)
+                .attr("height", function(d, i) { return y_scale(d.value)})
+                .attr('x', function(d,i){return (scope.model.margin_bars+scope.model.bar_width())*i})
+                .attr('y', function(d, i) { return scope.model.graph_height()-y_scale(d.value)})
+                .attr('width', scope.model.bar_width);
+
+        // Exit…
+        rect.exit()
+          .remove();
+
+           scope.controller.addGrid()
+
+       },
+            addGrid:function(){
+                // Define identity (1:1) scales
+                var x = d3.scale.identity().domain([0,scope.model.graph_width()]);
+                var y = d3.scale.identity().domain([0,scope.model.graph_height()]);
+                var chart =   scope.view.horizontalTicks
+
+                chart.selectAll("line.x").remove()
+
+        // Draw X-axis grid lines
+                var x_offset =scope.model.margin_bars+scope.model.bar_width();
+
+                chart.selectAll("line.x")
+                        .data(scope.model.data )
+                        .enter().append("line")
+                        .attr("class", "x")
+                        .attr("x1", function(d,i){return scope.model.margin_bars+ x_offset * i})
+                        .attr("x2", function(d,i){return scope.model.margin_bars + x_offset * i})
+                        .attr("y1", 0)
+                        .attr("y2", scope.model.graph_height())
+                        .style("stroke", scope.model.ticksClassVerticalColor);
+
+                chart.selectAll("line.y").remove()
+
+        // Draw Y-axis grid lines
+                chart.selectAll("line.y")
+                        .data(y.ticks(scope.model.dataMax()/scope.model.tick_divisions))
+                        .enter().append("line")
+                        .attr("class", "y")
+                        .attr("x1", scope.model.margin_bars)
+                        .attr("x2", scope.model.graph_width()+scope.model.margin_bars)
+                        .attr("y1", y)
+                        .attr("y2", y)
+                        .style("stroke", scope.model.ticksClassHorizontalColor);
+
+// Define stock x and y axis
+                var xAxis = d3.svg.axis().scale(x).orient('top');
+                var yAxis = d3.svg.axis().scale(y).orient('left');
+
+                var y_axis_positions = y.ticks(scope.model.dataMax()/scope.model.tick_divisions)
+
+                chart.selectAll("text").remove()
+
+                chart.selectAll("text")
+                        .data(y.ticks(scope.model.dataMax()/scope.model.tick_divisions))
+                        .enter().append("text")
+                        .attr("x",scope.model.width)
+                        .attr("y",  function(d, i) { return  scope.model.graph_height() - y_axis_positions[i]})
+                        .attr("dx", -15) // padding-right
+                        .attr("dy", "-.50px") // vertical-align: middle
+                        .attr("color", "#ff00ff") //
+                        .attr("text-anchor", "end") // text-align: right
+                        .text(function(d,i){return Math.floor(scope.model.tick_divisions *i    )});
+
+                chart.append('g')
+                        .attr("class", "axis")
+                        .call(xAxis);
+
+                chart.append('g')
+                        .attr("class", "axis")
+                        .call(yAxis);
+
+                chart.selectAll("g").remove()
+            }
+        }
+     }
+        // chart1Holder
+        scope.controller.draw();
+        scope.setData=function(value){
+        scope.model.data = value;
+        scope.model.timestamp = new Date();
+        scope.controller.redraw();
+    }
+
+   // var si = setInterval(function(){ scope.setData(generateDummyPieDate(10, 300))}, 3000)
+
+    return scope
+}
+
+
+///////////////////////////////////////////////////////////////////  ON DOC LOADED -->
+
+function onDocLoaded(){
+    // drawBarChart( generateDummyPieDate() );
+    //
+    //var targ1= document.getElementById('chart1Holder')
+
+    var _consecutiveArr = [{label:'10', value:100}, {label:'10', value:200}, {label:'10', value:300}, {label:'10', value:550}]
+
+    //DataVisClass.extendDv(verticalBarChart, 'verticalBarChart')
+
+    var vlc1 = new verticalBarChart('#targ1', generateDummyPieDate(80, 900))
+
+
+    var si = setInterval(function(){
+        vlc1.setData( generateDummyPieDate(100, 1000) )
+
+    }, 3000)
+
+}
+
+
+function getArrayRelataionship(){
+    var arr1=["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16"]
+    var arLen = 3
+    var outstring ="Modulos = "
+    for(var i=0; i<arr1.length; i++){
+        outstring += " / "+arr1[i % arLen] + " - " + i % arLen
+    }
+    return outstring
+}
+
+
+// alert("A "+getArrayRelataionship())
+
+
+</script>
+
+
+</head>
+<body onLoad="onDocLoaded()">
+
+<!-- Main container. -->
+<div role="main" id="main" class="container">
+
+
+    <!-- graph cell -->
+    <div class = 'datavis_holder'>
+        <p>A graph generated by dummy data</p>
+        <div class='datavis_inner'>
+            <div id="chart1Holder" >
+
+            </div>
+        </div>
+    </div>
+    <!-- graph cell -->
+
+
+</div>
+
+<!-- build:js scripts/amd-app.js -->
+<script type="text/javascript" src="scripts/libs/d3.v3.js"></script>
+<script type="text/javascript" src="scripts/tr/Core.js"></script>
+<script type="text/javascript" src="scripts/tr/DataVisClass.js"></script>
+
+<!-- endbuild -->
+
+
+<!--         <script data-main="scripts/config" src="scripts/libs/require.js"></script>
+ -->
+
+</body>
+</html>
