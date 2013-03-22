@@ -11,21 +11,21 @@
         color: #ffffff;
         font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     }
-    .chart {
-        font: 10px sans-serif;
-        text-align: right;
-        padding: 3px;
-        margin: 1px;
-        color: white;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+    /*.chart {*/
+        /*font: 10px sans-serif;*/
+        /*text-align: right;*/
+        /*padding: 3px;*/
+        /*margin: 1px;*/
+        /*color: white;*/
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+    /*}*/
 
-    .chart rect {
-        stroke: #2c2c2c;
-        fill: #ea7d23;
-    }
+    /*.chart rect {*/
+        /*stroke: #2c2c2c;*/
+        /*fill: #ea7d23;*/
+    /*}*/
 
     .chart{
         /*background-color: #242424;*/
@@ -39,6 +39,99 @@
             */
         position: relative;
 
+    }
+
+
+    .button-well {
+        padding: 50px 20px 20px;
+        border-radius: 6px;
+        background-color: #555;
+        background-image: linear-gradient(90deg, #525252, dimgray);
+        text-align: center;
+
+        background-color: #2a2a2b;
+        *zoom: 1;
+        filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF2A2A2B', endColorstr='#FF000000');
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2a2a2b), color-stop(100%, #000000));
+        background-image: -webkit-linear-gradient(top, #2a2a2b 0%, #000000 100%);
+        background-image: -moz-linear-gradient(top, #2a2a2b 0%, #000000 100%);
+        background-image: -o-linear-gradient(top, #2a2a2b 0%, #000000 100%);
+        background-image: linear-gradient(top, #2a2a2b 0%, #000000 100%);
+        border: 1px solid black;
+        border-left: 1px solid #303030;
+        border-bottom: 1px solid #303030;
+        display: block;
+        margin: 8px;
+        -webkit-box-shadow: inset -1px 1px 1px 1px rgba(0, 0, 0, 0.25);
+        box-shadow: inset -1px 1px 1px 1px rgba(0, 0, 0, 0.25);
+
+
+    }
+    .button-well .button {
+        display: inline-block;
+        margin-right: 5px;
+        margin-bottom: 30px;
+        margin-left: 5px;
+        padding: 7px;
+
+        border: 1px solid #494949;
+        border-radius: 2px;
+
+        background-color: #555;
+        background-image: linear-gradient(90deg, #525252, dimgray);
+
+        box-shadow:
+            inset 0 1px 0 0 rgba(255,255,255,0.4),
+            inset 0 0 5px 0 rgba(255,255,255,0.2),
+            inset 0 67px 67px -40px rgba(255,255,255,0),
+            0 2px 0 0 #2e2e2e,
+            0 3px 6px 0 rgba(0,0,0,0.4);
+        transition:
+            box-shadow 230ms ease-in-out,
+            transform 230ms ease-in-out,
+            border-color 230ms ease-in-out;
+
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        font-size: 10px;
+        line-height: 20px;
+        font-weight: 400;
+        text-align: left;
+        text-decoration: none;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.27);
+
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .button-well .button:hover {
+        border-color: rgba(73,73,73,0.5);
+        box-shadow:
+            inset 0 1px 0 0 rgba(255,255,255,0.6),
+            inset 0 0 5px 0 rgba(255,255,255,0.2),
+            inset 0 67px 67px -40px rgba(255,255,255,0.3),
+            0 2px 0 0 #2e2e2e,
+            0 3px 8px 0 rgba(0,0,0,0.4);
+    }
+    .button-well .button:active {
+        box-shadow:
+            inset 0 1px 0 0 rgba(255,255,255,0),
+            inset 0 1px 7px -1px rgba(0,0,0,0.35),
+            inset 0 67px 67px -40px rgba(255,255,255,0),
+            0 2px 0 0 #2e2e2e,
+            0 3px 8px 0 rgba(0,0,0,0);
+        transform: translate(0px, 2px);
+    }
+    @media (max-width: 767px) {
+        .button-well {
+            padding: 50px 0px 20px;
+            background-color: white;
+        }
+        .button-well .button {
+            padding-right: 19px;
+            padding-left: 19px;
+            background-position: 16px 53%, 50% 50%;
+            font-size: 20px;
+        }
     }
 
 
@@ -141,7 +234,6 @@ function verticalBarChart(container, data){
             bar_color:'#ea7d23',
             bar_border_color:'#ea7d23',
 
-
         },
         view:{
             chart:null,
@@ -159,14 +251,14 @@ function verticalBarChart(container, data){
 
                 var y_scale =  d3.scale.linear()
                         .domain([0, scope.model.dataMax()])
-                        .range([scope.model.graph_height(), 0]);
+                        .range([0 , scope.model.graph_height()]);
 
                 scope.view.horizontalTicks = d3.select(scope.model.tar_id).append("svg")
                         .attr("class", scope.model.ticksClassHorizontal)
                         .attr("width", scope.model.width )
                         .attr("height", scope.model.height)
                         //.attr("transform", "translate(400,200)")
-                        .style({'position':'absolute', 'left':scope.model.margin_left+'px'})
+                        .style({'position':'absolute', 'left':scope.model.margin_left-scope.model.margin_bars+'px'})
                         .style({"stroke":"#cccccc", 'fill':'#990900'});
 
                 scope.view.chart = d3.select(scope.model.tar_id).append("svg")
@@ -174,7 +266,6 @@ function verticalBarChart(container, data){
                         .attr("width", scope.model.width)
                         .attr("height", scope.model.height)
                         .style({'position':'absolute', 'left':scope.model.margin_left+'px'})
-
 
                 //-- get the bars
                scope.view.chart.selectAll("rect")
@@ -185,7 +276,9 @@ function verticalBarChart(container, data){
                        .attr('x', function(d,i){return (scope.model.margin_bars+scope.model.bar_width())*i})
                        .attr('y', function(d, i) { return scope.model.graph_height()-y_scale(d.value)})
                        .style({"stroke":scope.model.bar_border_color})
-                       .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)})            ;
+                       .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)});
+
+                scope.controller.addGrid()
 
                 //chart.exit().remove();
             },
@@ -193,8 +286,8 @@ function verticalBarChart(container, data){
        redraw: function () {
 
         var y_scale =  d3.scale.linear()
-                   .domain([0, scope.model.dataMax()])
-                   .range([scope.model.graph_height(), 0]);
+                .domain([0, scope.model.dataMax()])
+                .range([0 , scope.model.graph_height()]);
 
         var rect = scope.view.chart.selectAll("rect")
                 .data(scope.model.data);
@@ -205,7 +298,7 @@ function verticalBarChart(container, data){
                 .attr('x', function(d,i){return (scope.model.margin_bars+scope.model.bar_width())*i})
                 .attr('y', function(d, i) { return scope.model.graph_height()-y_scale(d.value)})
                 .style({"stroke":scope.model.bar_border_color})
-                .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)})            ;
+                .style('fill', function(d,i){console.log(i); return scope.model.get_bar_color(i)});
 
         // Update…
         rect.transition()
@@ -256,7 +349,7 @@ function verticalBarChart(container, data){
                         .attr("y2", y)
                         .style("stroke", scope.model.ticksClassHorizontalColor);
 
-// Define stock x and y axis
+        // Define stock x and y axis
                 var xAxis = d3.svg.axis().scale(x).orient('top');
                 var yAxis = d3.svg.axis().scale(y).orient('left');
 
@@ -273,7 +366,8 @@ function verticalBarChart(container, data){
                         .attr("dy", "-.50px") // vertical-align: middle
                         .attr("color", "#ff00ff") //
                         .attr("text-anchor", "end") // text-align: right
-                        .text(function(d,i){return Math.floor(scope.model.tick_divisions *i    )});
+                        .text(function(d,i){return Math.floor(scope.model.tick_divisions *i    )})
+                        .style({'color':'#ff00ff'});
 
                 chart.append('g')
                         .attr("class", "axis")
@@ -295,8 +389,6 @@ function verticalBarChart(container, data){
         scope.controller.redraw();
     }
 
-   // var si = setInterval(function(){ scope.setData(generateDummyPieDate(10, 300))}, 3000)
-
     return scope
 }
 
@@ -304,37 +396,85 @@ function verticalBarChart(container, data){
 ///////////////////////////////////////////////////////////////////  ON DOC LOADED -->
 
 function onDocLoaded(){
-    // drawBarChart( generateDummyPieDate() );
-    //
-    //var targ1= document.getElementById('chart1Holder')
 
     var _consecutiveArr = [{label:'10', value:100}, {label:'10', value:200}, {label:'10', value:300}, {label:'10', value:550}]
 
-    //DataVisClass.extendDv(verticalBarChart, 'verticalBarChart')
+    var vlc1 = new verticalBarChart('#targ1', generateDummyPieDate(80, 900));
+    var _dataUl = document.getElementById('data_output_1');
+    var pl = new populateUl('#data_output_1', generateDummyPieDate(100, 800));
 
-    var vlc1 = new verticalBarChart('#targ1', generateDummyPieDate(80, 900))
+    var consecData1 =           [
+        {"label": "Data 1:1", "value": 100},
+        {"label": "Data 1:2", "value": 200},
+        {"label": "Data 1:3", "value": 300},
+        {"label": "Data 1:4", "value": 400}
+    ];
 
+    var consecData2 =           [
+        {"label": "Data 1:1", "value": 100},
+        {"label": "Data 1:2", "value": 100},
+        {"label": "Data 1:3", "value": 300},
+        {"label": "Data 1:4", "value": 400},
+        {"label": "Data 1:4", "value": 500},
+        {"label": "Data 1:4", "value": 600},
+        {"label": "Data 1:4", "value": 700},
+        {"label": "Data 1:4", "value": 800},
+        {"label": "Data 1:4", "value": 900}
+    ];
 
-    var si = setInterval(function(){
-        vlc1.setData( generateDummyPieDate(100, 1000) )
-
-    }, 3000)
-
-}
-
-
-function getArrayRelataionship(){
-    var arr1=["v1", "v2", "v3", "v4", "v5", "v6", "v7", "v8", "v9", "v10", "v11", "v12", "v13", "v14", "v15", "v16"]
-    var arLen = 3
-    var outstring ="Modulos = "
-    for(var i=0; i<arr1.length; i++){
-        outstring += " / "+arr1[i % arLen] + " - " + i % arLen
+    document.getElementById('changeData1').onclick= function(){
+        var _dummyData = generateDummyPieDate(100, 1000)
+        vlc1.setData( _dummyData );
+        pl.setData(_dummyData);
     }
-    return outstring
+
+
+    document.getElementById('changeData2').onclick= function(){
+        vlc1.setData( consecData1 );
+        pl.setData(consecData1);
+    }
+
+    document.getElementById('changeData3').onclick= function(){
+        vlc1.setData( consecData2 );
+        pl.setData(consecData2);
+    }
+
+
+}
+
+/*
+
+This is to show the data in an unorded list
+
+ */
+
+function populateUl(target, data){
+    var scope = {
+        model:{data:data},
+        view:{target:target,
+        chart:null},
+        controller:{
+            init:function(){
+                var li = d3.select(scope.view.target).selectAll("li").data(scope.model.data);
+                li.exit().remove();
+                li.enter().append("li");
+                li.text(function(d,i){console.log("Node num "+i+" value: "+d.value); return d.label+" >> "+ d.value})
+                console.log("Li "+li)
+            }
+
+        }
+
+    }
+    scope.controller.init();
+    scope.setData=function(value){
+        scope.model.data=value;
+        scope.controller.init();
+    }
+    return scope
 }
 
 
-// alert("A "+getArrayRelataionship())
+
 
 
 </script>
@@ -357,6 +497,29 @@ function getArrayRelataionship(){
         </div>
     </div>
     <!-- graph cell -->
+
+    <!-- graph cell -->
+    <div class = 'datavis_holder'>
+        <p>Dummy data</p>
+        <div class='datavis_inner'>
+            <div id="chart1Holder2" >
+                <ul id='data_output_1'>
+                    <li>Thhing</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- graph cell -->
+
+
+    <div class="button-well">
+        <a href="#" id="changeData1" class="button wf-affected">change data</a>
+        <a href="#" id="changeData2" class="button wf-affected">data set 1</a>
+        <a href="#" id="changeData3" class="button wf-affected">data set 2</a>
+
+    </div>
+
 
 
 </div>
