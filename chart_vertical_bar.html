@@ -102,7 +102,7 @@ var scope = {
         margin_left:50,
         margin_right:20,
         margin_bottom:10,
-        margin_bars:9, //The margin between the bars
+        margin_bars:12, //The margin between the bars
         timestamp:new Date(),
         data:data,
         selected:0,
@@ -245,7 +245,6 @@ var x_offset =(scope.model.margin_bars+scope.model.bar_width)
             var yAxis = d3.svg.axis().scale(y).orient('left');
 
             var y_axis_positions = y.ticks(scope.model.dataMax()/scope.model.tick_divisions)
-            console.log(y_axis_positions)
 
             chart.selectAll("text").remove()
 
@@ -273,9 +272,7 @@ var x_offset =(scope.model.margin_bars+scope.model.bar_width)
 //            chart.selectAll("g").remove()
 
         },
-
-        update:function(){
-
+        refresh:function(){
             var y_scale =  d3.scale.linear()
                     .domain([0, scope.model.dataMax()])
                     .range([0, scope.model.graph_height()]);
@@ -283,32 +280,17 @@ var x_offset =(scope.model.margin_bars+scope.model.bar_width)
             var color = d3.scale.linear()
                     .range(["#aad", "#556"]);
 
-//            scope.view.horizontalTicks.selectAll("line")
-//                    .data(y_scale.ticks(20))
-//                    .enter().append("line")
-//                    .attr("x1", 0)
-//                    .attr("x2", scope.model.graph_width() )
-//                    .attr("y1", y_scale)
-//                    .attr("y2", y_scale)
-//                    .style("stroke", function() { return color(Math.random()); });
-//
-//            scope.view.horizontalTicks.selectAll("line")
-//                    .data(y_scale.ticks(0))
-//                    .exit()
-
-
-
             scope.view.rect = scope.view.chart.selectAll("rect")
                     .data(scope.model.data, function(d) { return d.value; });
 
             scope.model.bar_width = scope.model.barOffset() - scope.model.margin_bars
 
-            scope.view.rect.enter().insert("rect", "line")
-                   // .attr("height", function(d) { return this.attr( 'height') })
+            scope.view.rect.enter().insert("rect")
+                // .attr("height", function(d) { return this.attr( 'height') })
                     .attr("width", function(d) { return scope.model.bar_width })
                     .attr("y", function(d,i){return scope.model.graph_height()+10+scope.model.margin_top} )
                     .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset() *i); })
-                    .style({"stroke":"#ccc0cc", 'fill':'#00ff00'});
+                   // .style({"stroke":"#ccc0cc", 'fill':'#0000ff'});
 
             // Update…
             scope.view.rect.transition()
@@ -319,6 +301,45 @@ var x_offset =(scope.model.margin_bars+scope.model.bar_width)
                     .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset()*i); })
 
                     .style({"stroke":scope.model.bar_border_color, 'fill':scope.model.bar_color});
+
+            // Exit…
+            scope.view.rect.exit()
+                    .remove();
+
+            //-- add the grid
+
+            scope.controller.addGrid()
+        },
+
+        update:function(){
+            var y_scale =  d3.scale.linear()
+                    .domain([0, scope.model.dataMax()])
+                    .range([0, scope.model.graph_height()]);
+
+            var color = d3.scale.linear()
+                    .range(["#aad", "#556"]);
+
+            scope.view.rect = scope.view.chart.selectAll("rect")
+                    .data(scope.model.data, function(d) { return d.value; });
+
+            scope.model.bar_width = scope.model.barOffset() - scope.model.margin_bars
+
+            scope.view.rect.enter().insert("rect", "line")
+                    .attr("height", function(d) { return y_scale( d.value) })
+                    .attr("width", function(d) { return scope.model.bar_width })
+                    .attr("y", function(d,i){return scope.model.graph_height()+10+scope.model.margin_top} )
+                    .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset() *i); })
+                    .style({"stroke":"#ccc0cc", 'fill':'#00ff00'});
+
+            // Update…
+            scope.view.rect.transition()
+                    .duration(1000)
+                   // .attr("height", function(d) { return y_scale( d.value) })
+                    .attr("width", function(d) { return scope.model.barOffset()-scope.model.margin_bars })
+                    .attr("y", function(d,i){return scope.model.graph_height()-y_scale( d.value)} )
+                    .attr("x", function(d, i) { return scope.model.margin_left+( scope.model.barOffset()*i); })
+
+                  //  .style({"stroke":scope.model.bar_border_color, 'fill':scope.model.bar_color});
 
             // Exit…
             scope.view.rect.exit()
@@ -341,7 +362,7 @@ var x_offset =(scope.model.margin_bars+scope.model.bar_width)
 
     scope.setData = function(value){
         scope.model.data = value;
-        scope.controller.update();
+        scope.controller.refresh();
     }
     return scope;
 }
