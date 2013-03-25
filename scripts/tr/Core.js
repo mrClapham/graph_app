@@ -18,7 +18,6 @@ function Core(){
     var t = this
 
     this.onStateChange=function(e){
-        //
         alert("CORE DATA CHANGE...")
     }
 }
@@ -73,14 +72,22 @@ Core.prototype={
             }
         }
     },
+    onStateChange: function(){
+            console.log("None overidden Core onStateChange")
+    },
     init:function(){
         //-- not used yet
+        try{
+            this.addListener(CONSTANTS.STATE_CHANGE, this.onStateChange, this )
+        }catch(e){
+            //----
+        }
     },
     model:{data1:"DATA ONE"}, view:{},  controller:{}
 }
 
 Core.prototype.setEventHandlers = function(){
-    alert("setEventHandlers CALLED")
+    //alert("setEventHandlers CALLED")
 }
 
 
@@ -99,9 +106,7 @@ Core.prototype.onModelChanged = function(e){
  */
 Core.prototype.set = function(id, value){
     //console.log("this.model[id] = "+this.model[id]);
-    console.log("_____________________________________________________________");
 
-    console.log('SET has been called id = '+id+" value = "+value );
         try{
             if(this.get(id) != value){
                 this.model[id]=value;
@@ -139,6 +144,23 @@ Core.extend = function(classType,construc){
     classType.prototype = new Core();
     classType.prototype.constructor=construc;
 }
+
+
+Core.extend_class = function(targ, construc){
+    if( typeof targ =='function'){
+        Core.extend(targ, construc)
+        var _cc = new targ;
+        _cc.addListener(CONSTANTS.STATE_CHANGE, _cc.onStateChange, _cc);
+
+        return _cc
+    }
+
+  return
+
+}
+
+
+
 
 
 //-- for accessing JSONP feeds ---
