@@ -204,7 +204,7 @@ function verticalBarChart(container, data){
             ticksClassVertical:'ticks_v',
             ticksClassVerticalColor:'#2c2c2c',
             ticksClassHorizontalColor:'#2c2c2c',
-            tick_divisions:100,
+            tick_divisions:50,
             graph_width:function(){
                 // The width left for the actual chart once the margins are removed
                 return scope.model.width - (scope.model.margin_left+scope.model.margin_right)
@@ -347,13 +347,21 @@ function verticalBarChart(container, data){
                         .attr("x2", scope.model.graph_width()+scope.model.margin_bars)
                         .attr("y1", y)
                         .attr("y2", y)
-                        .style("stroke", scope.model.ticksClassHorizontalColor);
+                        //.style("stroke", scope.model.ticksClassHorizontalColor);
+                        .style("stroke", '#ffffff');
 
-        // Define stock x and y axis
+
+                // Define stock x and y axis
                 var xAxis = d3.svg.axis().scale(x).orient('top');
                 var yAxis = d3.svg.axis().scale(y).orient('left');
 
                 var y_axis_positions = y.ticks(scope.model.dataMax()/scope.model.tick_divisions)
+
+
+                console.log(" scope.model.dataMax()  "+scope.model.dataMax())
+                console.log(" scope.model.dataMax()/scope.model.tick_divisions  "+scope.model.dataMax()/scope.model.tick_divisions)
+                console.log(" y_axis_positions "+y_axis_positions)
+
 
                 chart.selectAll("text").remove()
 
@@ -363,10 +371,10 @@ function verticalBarChart(container, data){
                         .attr("x",scope.model.width)
                         .attr("y",  function(d, i) { return  scope.model.graph_height() - y_axis_positions[i]})
                         .attr("dx", -15) // padding-right
-                        .attr("dy", "-.50px") // vertical-align: middle
+                        .attr("dy", 12) // vertical-align: middle
                         .attr("color", "#ff00ff") //
                         .attr("text-anchor", "end") // text-align: right
-                        .text(function(d,i){return Math.floor(scope.model.tick_divisions *i    )})
+                        .text(function(d,i){return Math.ceil(scope.model.tick_divisions *i    )})
                         .style({'color':'#ff00ff'});
 
                 chart.append('g')

@@ -68,7 +68,7 @@ body{
 //            _cc2.set('val1 cc2', 'value one... cc2')
 
 
-            var _retClass = Core.extend_class(newCore, "extendedCore")
+            var _retClass = Core.extend_class(newCore("Config Values"), "extendedCore")
             _retClass.set('val1 cc extended', 'value one... cc extended')
             _retClass.set('val1 cc extended', 'value one... cc extended')
 
@@ -79,9 +79,11 @@ body{
 
 
         }
-            function newCore(){
+            function newCore(val){
 
                 var scope={
+
+                    model:{perVar:"HElow World!!",val:val},
                     controller:{
                         onStateChageWidth:function(e){
                             console.log("scope onStateChageWidth" )
@@ -91,6 +93,7 @@ body{
                 }
 
                 this.onStateChange = function(e){
+                    alert(scope.model.val)
                     console.log("newCore THERE HAS BEEN A STATE CHANGE TO ID: "+ e.data.id)
                     console.log("newCore THERE HAS BEEN A STATE CHANGE TO VALUE: "+ e.data.value)
                         switch (e.data.id){
