@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/d3_playground.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="app.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363628964011" ignored="false" />
+    <file path="/Dummy.txt" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363629077679" ignored="false" />
     <file path="/DataVisBase.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362669202184" ignored="false" />
     <file path="/InheritTest.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1362666759824" ignored="false" />
     <file path="/app_scripts.js" changelist="45e3166e-33e4-4f48-8bed-7e12a5a4ef12" time="1363171777138" ignored="false" />
@@ -53,10 +54,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chart_vertical_bar.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="chart_vertical_bar.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chart_vertical_bar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="30" selection-start="8194" selection-end="8194" vertical-scroll-proportion="2.5070422">
+            <state line="219" column="30" selection-start="8194" selection-end="8194" vertical-scroll-proportion="-7.12">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="datavis.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/stylesheets/datavis.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="0" selection-start="0" selection-end="135" vertical-scroll-proportion="0.038809832">
               <folding />
             </state>
           </provider>
@@ -382,20 +392,12 @@
     </servers>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
-    <configuration default="false" name="index.html" type="JavascriptDebugSession" factoryName="Local" temporary="true">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" value="file://$PROJECT_DIR$/index.html" />
-      </JSDebuggerConfigurationSettings>
+    <configuration default="false" name="index.html" type="JavascriptDebugType" temporary="true" uri="file://$PROJECT_DIR$/index.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="404.html" type="JavascriptDebugSession" factoryName="Local" temporary="true">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" value="file://$PROJECT_DIR$/404.html" />
-      </JSDebuggerConfigurationSettings>
+    <configuration default="false" name="404.html" type="JavascriptDebugType" temporary="true" uri="file://$PROJECT_DIR$/404.html">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
@@ -524,7 +526,19 @@
       <created>1363628966813</created>
       <updated>1363628966813</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="more css/scss">
+      <created>1363628981744</created>
+      <updated>1363628981744</updated>
+    </task>
+    <task id="LOCAL-00020" summary="more css/scss">
+      <created>1363629011632</created>
+      <updated>1363629011632</updated>
+    </task>
+    <task id="LOCAL-00021" summary="yet more css/scss">
+      <created>1363629082298</created>
+      <updated>1363629082298</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -552,12 +566,12 @@
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296593" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.7074074" sideWeight="0.97968197" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2462963" sideWeight="0.97968197" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14787431" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32809612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2139808" sideWeight="0.12037037" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2139808" sideWeight="0.31944445" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2139808" sideWeight="0.16574074" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2139808" sideWeight="0.42777777" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32532346" sideWeight="0.9845251" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -613,7 +627,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="more css/scss" />
+    <option name="LAST_COMMIT_MESSAGE" value="yet more css/scss" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -646,6 +660,7 @@
     <MESSAGE value="General updates Fri 15th - stable version" />
     <MESSAGE value="All the css/scss" />
     <MESSAGE value="more css/scss" />
+    <MESSAGE value="yet more css/scss" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -656,11 +671,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="922" selection-end="922" vertical-scroll-proportion="0.3325766" />
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavascriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="7" selection-start="854" selection-end="854" vertical-scroll-proportion="0.3325766" />
@@ -757,7 +767,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chart_vertical_bar.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="219" column="30" selection-start="8194" selection-end="8194" vertical-scroll-proportion="2.5070422">
+        <state line="219" column="30" selection-start="8194" selection-end="8194" vertical-scroll-proportion="-7.12">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stylesheets/datavis.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="0" selection-start="0" selection-end="135" vertical-scroll-proportion="0.038809832">
           <folding />
         </state>
       </provider>
